@@ -54,35 +54,85 @@ def lose6LifeState():
     print("/ \    |")
     print("    ----")
 
+# Get letters user guessed
+def getUserGuess(word, guessedIndices):
+    guess = ""
+    length = len(word)
+    for i in range(length):
+        if i in guessedIndices:
+            guess += " " + word[i]
+        else:
+            guess += ' _'
+    return guess
+
+# Check if character in the word
+def checkCharacterInWord(guess, word, guessedIndices):
+    length = len(word)
+    count = 0
+    for i in range(length):
+        if i not in guessedIndices and word[i] == guess:
+            guessedIndices.add(i)
+            count += 1
+    
+    return count > 0
+            
 
 lives = 6
 running = True
-while running:
-    print("Hard Hangman")
-    print("Press 'p' to start game")
-    print("Press 'q' to quit")
 
-    input = input("Enter command: ")
-    if input == "q" or input == "Q":
-        running = False
+print("Shitty Hangman")
+startGameState()
+
+# Fetch random word
+word = "cannibal"
+guessedIndices = set()
+guessedLetters = set()
+userGuess = getUserGuess(word, guessedIndices)
+
+while running:
+    # Get user guess
+    guess = input("Enter a letter to guess: ")
+    if guess not in guessedLetters:
+        guessedLetters.add(guess)
     else:
-        if lives == 6:
-            startGameState()
-        elif lives == 5:
-            lose1LifeState()
-        elif lives == 4:
-            lose2lifeState()
-        elif lives == 3:
-            lose3LifeState()
-        elif lives == 2:
-            lose4LifeState()
-        elif lives == 1:
-            lose5LifeState()
-        else:
-            lose5LifeState()
-            print("You lose")
-            running = False
-            
+        print("Letter already guessed")
+        continue
+
+    # Check if letter in word
+    guessInWord = checkCharacterInWord(guess, word, guessedIndices)
+    if not guessInWord:
+        lives -= 1
+
+    userGuess = getUserGuess(word, guessedIndices)
+
+    # Print output
+    if lives == 6:
+        startGameState()
+    elif lives == 5:
+        lose1LifeState()
+    elif lives == 4:
+        lose2lifeState()
+    elif lives == 3:
+        lose3LifeState()
+    elif lives == 2:
+        lose4LifeState()
+    elif lives == 1:
+        lose5LifeState()
+    elif lives == 0:
+        lose6LifeState()
+        print("You lose")
+        running = False
+        continue
+
+    print(userGuess)
+    print(guessedLetters.__str__())
+    # Check for win
+    if "_" not in userGuess:
+        print("You win!")
+        running = False
+        continue
+
+
             
         
 
