@@ -120,12 +120,13 @@ while running:
         lose5LifeState()
     elif lives == 0:
         lose6LifeState()
+        print("The word was " + word)
         print("You lose")
         running = False
         continue
 
     print(userGuess)
-    print(guessedLetters.__str__())
+    print("Guessed Letters: " + guessedLetters.__str__())
     # Check for win
     if "_" not in userGuess:
         print("You win!")
