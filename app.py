@@ -90,13 +90,16 @@ rndWord = requests.get("https://random-words-api.vercel.app/word")
 Apidata = rndWord.text
 jdata = json.loads(rndWord.text)
 word = jdata[0]['word']
+word = word.lower()
 guessedIndices = set()
 guessedLetters = set()
 userGuess = getUserGuess(word, guessedIndices)
+print(userGuess)
 
 while running:
     # Get user guess
     guess = input("Enter a letter to guess: ")
+    guess = guess.lower()
     if guess not in guessedLetters:
         guessedLetters.add(guess)
     else:
