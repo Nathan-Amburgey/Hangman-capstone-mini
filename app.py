@@ -47,6 +47,7 @@ def lose5LifeState():
     print("\|/    |")
     print("/      |")
     print("    ----")
+    print("Hint: pronounced " + jdata[0]['pronunciation'])
 
 def lose6LifeState():
     print("--------")
