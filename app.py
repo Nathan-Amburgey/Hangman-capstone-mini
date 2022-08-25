@@ -1,3 +1,5 @@
+import json
+import requests
 def startGameState():
     print("--------")
     print(" |     |")
@@ -84,7 +86,10 @@ print("Shitty Hangman")
 startGameState()
 
 # Fetch random word
-word = "cannibal"
+rndWord = requests.get("https://random-words-api.vercel.app/word")
+Apidata = rndWord.text
+jdata = json.loads(rndWord.text)
+word = jdata[0]['word']
 guessedIndices = set()
 guessedLetters = set()
 userGuess = getUserGuess(word, guessedIndices)
