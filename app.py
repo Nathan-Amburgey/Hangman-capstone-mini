@@ -39,6 +39,7 @@ def lose4LifeState():
     print("\|/    |")
     print("       |")
     print("    ----")
+    print("Hint: definition " + jdata[0]['definition'])
 
 def lose5LifeState():
     print("--------")
@@ -47,6 +48,7 @@ def lose5LifeState():
     print("\|/    |")
     print("/      |")
     print("    ----")
+    print("Hint: definition " + jdata[0]['definition'])
     print("Hint: pronounced " + jdata[0]['pronunciation'])
 
 def lose6LifeState():
